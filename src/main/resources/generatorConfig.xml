@@ -5,15 +5,9 @@
 
 <generatorConfiguration>
 
-    <properties resource="application.yml"/>
-    <classPathEntry location="D:/mysql/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar"/>
+    <properties resource="application.properties"/>
+    <classPathEntry location="C:\Users\nina_nyang\.m2\repository\mysql\mysql-connector-java\5.1.44\mysql-connector-java-5.1.44.jar"/>
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
-        <property name="beginningDelimiter" value="`"/>
-        <property name="endingDelimiter" value="`"/>
-        <property name="javaFileEncoding" value="UTF-8"/>
-        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
-        </plugin>
         <!-- 注释 -->
         <commentGenerator>
             <!-- 是否生成注释代时间戳 -->
@@ -24,16 +18,16 @@
         <!-- JDBC连接 -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8"
+                connectionURL="jdbc:mysql://localhost:3306/my-collect?characterEncoding=UTF-8"
                 userId="root"
                 password="123456">
         </jdbcConnection>
         <!-- 生成实体类地址 -->
-        <javaModelGenerator targetPackage="com.chaoqi.springboot_mybatisplus.dao.domain" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.collect.entity" targetProject="src/main/java"/>
         <!-- 生成mapper xml文件 -->
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
         <!-- 生成mapper xml对应Client-->
-        <javaClientGenerator targetPackage="com.chaoqi.springboot_mybatisplus.dao.mapper" targetProject="src/main/java"
+        <javaClientGenerator targetPackage="com.collect.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"/>
         <!-- 配置表信息 -->
         <table tableName="%">

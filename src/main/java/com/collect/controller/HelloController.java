@@ -1,4 +1,4 @@
-package com.collect.web;
+package com.collect.controller;
 
 /**
  * Created by nina_nyang on 2018/4/12.
