@@ -1,52 +1,28 @@
-package com.collect.entity;
+package com.collect.dto;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableId;
-import java.io.Serializable;
 
 /**
- * <p>
- * 
- * </p>
- *
- * @author yangning123
- * @since 2018-04-25
+ * Created by nina_nyang on 2018/4/25.
  */
-public class User implements Serializable {
+public class UserAddDto {
 
-    private static final long serialVersionUID = 11111111111111L;
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
-
-    @TableField("name")
     private String name;
 
-    @TableField("user_name")
     private String userName;
 
-    @TableField("email")
     private String email;
 
-    @TableField("pass_word")
     private String passWord;
 
-    @TableField("background_picture")
     private String backgroundPicture;
 
-    @TableField("introduction")
+    private Date createTime;
+
+    private Date modifyTime;
+
     private String introduction;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -88,24 +64,27 @@ public class User implements Serializable {
         this.backgroundPicture = backgroundPicture;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
+    }
+
     public String getIntroduction() {
         return introduction;
     }
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-        "id=" + id +
-        ", name=" + name +
-        ", userName=" + userName +
-        ", email=" + email +
-        ", passWord=" + passWord +
-        ", backgroundPicture=" + backgroundPicture +
-        ", introduction=" + introduction +
-        "}";
     }
 }
