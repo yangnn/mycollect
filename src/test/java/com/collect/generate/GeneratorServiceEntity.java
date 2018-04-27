@@ -19,7 +19,8 @@ public class GeneratorServiceEntity {
     public void generateCode() {
         String packageName = "com.collect";
         boolean serviceNameStartWithI = false;//user -> UserService, 设置成true: user -> IUserService
-        generateByTables(serviceNameStartWithI, packageName, "user", "collect");
+//        generateByTables(serviceNameStartWithI, packageName, "user", "collect");
+        generateByTables(serviceNameStartWithI, packageName, "tag");
     }
 
     private void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {

@@ -1,68 +1,42 @@
-package com.collect.entity;
+package com.collect.dto;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.enums.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableId;
 import java.io.Serializable;
 
 /**
- * <p>
- * 
- * </p>
- *
- * @author yangning123
- * @since 2018-04-25
+ * Created by nina_nyang on 2018/4/27.
  */
-public class Collect implements Serializable {
+public class CollectDto implements Serializable{
 
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private static final long serialVersionUID = 441936368463415618L;
     /**
      * 用户id
      */
-    @TableField("user_id")
     private Long userId;
     /**
      * 标题
      */
-    @TableField("title")
     private String title;
     /**
      * 链接
      */
-    @TableField("url")
     private String url;
     /**
      * 描述
      */
-    @TableField("description")
     private String description;
     /**
      * logo链接
      */
-    @TableField("logo_url")
     private String logoUrl;
     /**
      * 类别
      */
-    @TableField("tag_id")
     private Integer tagId;
     /**
      * 是否删除
      */
-    @TableField("is_delete")
     private String isDelete;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getUserId() {
         return userId;
@@ -118,19 +92,5 @@ public class Collect implements Serializable {
 
     public void setIsDelete(String isDelete) {
         this.isDelete = isDelete;
-    }
-
-    @Override
-    public String toString() {
-        return "Collect{" +
-        "id=" + id +
-        ", userId=" + userId +
-        ", title=" + title +
-        ", url=" + url +
-        ", description=" + description +
-        ", logoUrl=" + logoUrl +
-        ", tagId=" + tagId +
-        ", isDelete=" + isDelete +
-        "}";
     }
 }

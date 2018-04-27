@@ -1,11 +1,14 @@
 package com.collect.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by nina_nyang on 2018/4/25.
  */
-public class UserAddDto {
+public class UserAddDto implements Serializable {
+
+    private static final long serialVersionUID = 3180833274269231523L;
 
     private String name;
 

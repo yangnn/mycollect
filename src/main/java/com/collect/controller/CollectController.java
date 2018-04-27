@@ -1,9 +1,11 @@
 package com.collect.controller;
 
 
+import com.collect.dto.CollectDto;
 import com.collect.entity.Collect;
 import com.collect.entity.User;
 import com.collect.service.CollectService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,17 +24,37 @@ import org.springframework.web.bind.annotation.RestController;
  * @author yangning123
  * @since 2018-04-25
  */
-@RestController
+//@RestController
 @RequestMapping("/collect")
 public class CollectController {
 
     @Autowired
-    CollectService collectService;
+    private CollectService collectService;
 
 
     @RequestMapping(value = "{id}",method = RequestMethod.GET)
     public Collect query(@PathVariable Long id){
-        return collectService.selectById(id);
+        Collect collect = collectService.selectById(id);
+        return collect;
     }
+
+    @RequestMapping(value = "/build",method = RequestMethod.POST)
+    public void add(CollectDto dto){
+        Collect collect = new Collect();
+        BeanUtils.copyProperties(dto, collect);
+        collectService.insert(collect);
+    }
+
+    @RequestMapping(value = "{id}",method = RequestMethod.DELETE)
+    public void delte(@PathVariable Long id){
+        collectService.deleteById(id);
+    }
+
+    @RequestMapping(value = "/getCollects", method = RequestMethod.GET)
+    public List<Collect> getByUserId(Long userId){
+        return collectService.getByUserId(userId);
+    }
+
+
 }
 

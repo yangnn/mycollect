@@ -28,3 +28,14 @@ CREATE TABLE `collect` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `tag` (
+  `id` bigint(15) NOT NULL,
+  `user_id` bigint(15) DEFAULT NULL,
+  `comment` varchar(200) DEFAULT NULL COMMENT '描述',
+  `creat_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
