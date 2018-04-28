@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery-confirm.min.css" rel="stylesheet">
+
+    <link href="css/signin.css" rel="stylesheet">
+    <link href="css/new_css.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div align="center" style="margin-top:20%;">
+
+    <form id="loginForm" method="post" action="/login/x">
+        请输入用户名&nbsp;&nbsp;<input type="text" id="loginName" name="loginName"><br/>
+        <br/>
+        请输入密&nbsp;&nbsp;&nbsp;码&nbsp;&nbsp;<input type="password" id="password" name="password"><br/>
+        <br/>
+        <input type="button" id="sub" value="登录"/>
+    </form>
+
+</div>
+
+</body>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-confirm.min.js"></script>
+<script src="js/utils.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $("#sub").bind("click", function () {
+            var loginName = $("#loginName").val();
+            var password = $("#password").val();
+            if (loginName === '') {
+                alert("请输入用户名！")
+                return;
+            }
+
+            if (password === '') {
+                alert("请输入密码！")
+                return;
+            }
+
+            //_util.process(this);
+            _util._ajax({
+                url: "/login/" + loginName,
+                type: 'POST',
+                contentType: 'application/json',
+                data: $("#loginForm").serializeObject(),
+                success: function (rsp) {
+                    //_util.cancelProcess(this);
+                    if (rsp.code === 200) {
+                        window.localStorage.setItem("userName", rsp.data.userRspDTO.userName);
+                        window.localStorage.setItem("loginName", rsp.data.userRspDTO.loginName);
+                        window.localStorage.setItem("isPartTime", rsp.data.userRspDTO.isPartTime);
+                        window.sessionStorage.setItem("consultantSn", rsp.data.userRspDTO.consultantSn);
+                        window.localStorage.setItem("resources", JSON.stringify(rsp.data.resources));
+                        window.localStorage.setItem("homeworkUIUrl", rsp.reminder);
+                        window.localStorage.setItem("token", "99681c6879174cb085a9840070f9643b");
+                        jump2Index();
+                    }
+                },
+                error: function (ex) {
+                    alert("操作失败");
+                    console.log(ex);
+                    //_util.cancelProcess(this);
+                }
+            });
+        });
+
+        function jump2Index() {
+            window.location.href = "test.html";
+        }
+
+        $(document).keydown(function (event) {
+            if (event.keyCode == 13) {
+                $("#sub").click();
+            }
+        });
+
+    });
+
+
+</script>
+
+
+</html>
