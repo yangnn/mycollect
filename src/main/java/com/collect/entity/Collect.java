@@ -48,8 +48,8 @@ public class Collect implements Serializable {
     /**
      * 类别
      */
-    @TableField("tag_id")
-    private Integer tagId;
+    @TableField("type_id")
+    private Integer typeId;
     /**
      * 是否删除
      */
@@ -104,12 +104,12 @@ public class Collect implements Serializable {
         this.logoUrl = logoUrl;
     }
 
-    public Integer getTagId() {
-        return tagId;
+    public Integer getTypeId() {
+        return typeId;
     }
 
-    public void setTagId(Integer tagId) {
-        this.tagId = tagId;
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
     }
 
     public String getIsDelete() {
@@ -129,7 +129,7 @@ public class Collect implements Serializable {
         ", url=" + url +
         ", description=" + description +
         ", logoUrl=" + logoUrl +
-        ", tagId=" + tagId +
+        ", typeId=" + typeId +
         ", isDelete=" + isDelete +
         "}";
     }

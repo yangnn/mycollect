@@ -10,7 +10,7 @@ public class UserInfoDTO implements Serializable{
     private static final long serialVersionUID = 2816897889189823900L;
 
     //登录名
-    private String loginName;
+    private String userName;
     //密码
     private String password;
     //新密码1
@@ -18,12 +18,12 @@ public class UserInfoDTO implements Serializable{
     //新密码2
     private String newPassword2;
 
-    public String getLoginName() {
-        return loginName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

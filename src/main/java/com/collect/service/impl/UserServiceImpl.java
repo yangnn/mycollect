@@ -27,7 +27,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserMapper userMapper;
 
     @Override
-    public User getByName(String name) {
+    public User getByUserName(String name) {
         Wrapper<User> wrapper = new EntityWrapper<>();
         wrapper.eq("user_name", name);
 

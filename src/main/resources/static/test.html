@@ -38,52 +38,101 @@
     </head>
     <body>
         <div class="pos_abs">
-            <ul>
-                <li class="site-item">
-                    <a class="imgicon" data-title="百度" style="background-image:url(img/baidu.gif);" href="http://www.baidu.com/?tn=sitehao123_15">百度</a>
-                </li>
-                <li class="site-item">
-                    <a class="imgicon" data-title="汽车之家" style="background-image:url(img/tm.png);" href="https://www.autohome.com.cn">汽车之家</a>
-                </li>
-                <li class="site-item">
-                    <a class="imgicon" data-title="百度" style="background-image:url(img/baidu.gif);" href="http://www.baidu.com/?tn=sitehao123_15">百度</a>
-                </li>
-                <li class="site-item">
-                    <a class="imgicon" data-title="汽车之家" style="background-image:url(img/tm.png);" href="https://www.autohome.com.cn">汽车之家</a>
-                </li>
-                <li class="site-item">
-                    <a class="imgicon" data-title="百度" style="background-image:url(img/baidu.gif);" href="http://www.baidu.com/?tn=sitehao123_15">百度</a>
-                </li>
-                <li class="site-item">
-                    <a class="imgicon" data-title="汽车之家" style="background-image:url(img/tm.png);" href="https://www.autohome.com.cn">汽车之家</a>
-                </li>
-                <li class="site-item">
-                    <a class="imgicon" data-title="百度" style="background-image:url(img/baidu.gif);" href="http://www.baidu.com/?tn=sitehao123_15">百度</a>
-                </li>
-                <li class="site-item">
-                    <a class="imgicon" data-title="汽车之家" style="background-image:url(img/tm.png);" href="https://www.autohome.com.cn">汽车之家</a>
-                </li>
-                <li class="site-item">
-                    <a class="imgicon" data-title="百度" style="background-image:url(img/baidu.gif);" href="http://www.baidu.com/?tn=sitehao123_15">百度</a>
-                </li>
-                <li class="site-item">
-                    <a class="imgicon" data-title="汽车之家" style="background-image:url(img/tm.png);" href="https://www.autohome.com.cn">汽车之家</a>
-                </li>
 
+            <div id = "collects">
+            </div>
 
-            </ul>
+            <div>
+                <button id="add" type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <div id = "addForm">
+                <form role="form">
+                    <div class="form-group">
+                        <input id = "title" class="form-control input-lg" type="text" placeholder="网站名称">
+                    </div>
+                    <div class="form-group">
+                        <input id = "url" class="form-control" type="text" placeholder="默认输入">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-sm" type="text" placeholder=".input-sm">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control input-lg">
+                            <option value="">.input-lg</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button id="addCollect" type="submit" class="btn btn-default">添加</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
 
-    <div>
-        <button id="add" type="button" class="btn btn-default" aria-label="Left Align">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        </button>
-    </div>
+
+
+
 
     <script>
-        $("#add").click(function () {
-            alert(1);
+        $(function(){
+            $("#addForm").hide();
+            $.ajax({
+                url: "/collect/getByUserId/1",
+                type: "GET",
+                success: function (rsp) {
+                    if (rsp.success == true && rsp.data.length > 0) {
+                        $("#collects").html(init(rsp.data))
+                    } else {
+
+                    }
+                }
+            });
         });
+
+        $("#add").click(function () {
+            $("#addForm").show();
+        });
+
+        function init(data) {
+            var html="";
+            $.each(data, function (index,n) {
+                html += '<div class="col-lg-2"><a class="imgicon" data-title="' + data[index].title + '" href="'+
+                    data[index].url + '">'+ data[index].title +'</a></div>';
+            })
+            return html;
+        }
+
+        function appendTo(data) {
+            var html = '<div class="col-lg-2"><a class="imgicon" data-title="' + data.title + '" href="'+
+                data.url + '">'+ data.title +'</a></div>';
+            return html;
+        }
+
+        $("#addCollect").click(function () {
+            var params = {};
+//            params.userId = 1;
+            debugger;
+            params.title = $("#title").val();
+            params.url = $("#url").val();
+            $.ajax({
+                url: "/collect/build",
+                type: "post",
+                contentType: 'application/json',
+                data: params,
+                success: function (rsp) {
+                    if (rsp.success == true) {
+                        $("#collects").appendChild(appendTo(params))
+                    } else {
+
+                    }
+                }
+            });
+        });
+
     </script>
 
 

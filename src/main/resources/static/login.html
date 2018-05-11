@@ -15,12 +15,13 @@
 
 <div align="center" style="margin-top:20%;">
 
-    <form id="loginForm" method="post" action="/login/x">
+    <form id="loginForm">
         请输入用户名&nbsp;&nbsp;<input type="text" id="loginName" name="loginName"><br/>
         <br/>
         请输入密&nbsp;&nbsp;&nbsp;码&nbsp;&nbsp;<input type="password" id="password" name="password"><br/>
         <br/>
         <input type="button" id="sub" value="登录"/>
+        <input type="button" id="sign" value="注册"/>
     </form>
 
 </div>
@@ -30,14 +31,13 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-confirm.min.js"></script>
-<script src="js/utils.js"></script>
 <script type="text/javascript">
 
     $(function () {
         $("#sub").bind("click", function () {
-            var loginName = $("#loginName").val();
+            var userName = $("#loginName").val();
             var password = $("#password").val();
-            if (loginName === '') {
+            if (userName === '') {
                 alert("请输入用户名！")
                 return;
             }
@@ -47,22 +47,19 @@
                 return;
             }
 
-            //_util.process(this);
-            _util._ajax({
-                url: "/login/" + loginName,
-                type: 'POST',
+            var params = {};
+            params.userName = $("#loginName").val();
+            params.password = $("#password").val();
+
+            $.ajax({
+                url: "/login1",
+                type: 'GET',
                 contentType: 'application/json',
-                data: $("#loginForm").serializeObject(),
+                data: params,
                 success: function (rsp) {
-                    //_util.cancelProcess(this);
                     if (rsp.code === 200) {
-                        window.localStorage.setItem("userName", rsp.data.userRspDTO.userName);
-                        window.localStorage.setItem("loginName", rsp.data.userRspDTO.loginName);
-                        window.localStorage.setItem("isPartTime", rsp.data.userRspDTO.isPartTime);
-                        window.sessionStorage.setItem("consultantSn", rsp.data.userRspDTO.consultantSn);
-                        window.localStorage.setItem("resources", JSON.stringify(rsp.data.resources));
-                        window.localStorage.setItem("homeworkUIUrl", rsp.reminder);
-                        window.localStorage.setItem("token", "99681c6879174cb085a9840070f9643b");
+                        window.localStorage.setItem("userName", rsp.data.userName);
+                        window.localStorage.setItem("userId", rsp.data.id);
                         jump2Index();
                     }
                 },
