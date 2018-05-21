@@ -32,4 +32,13 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
 
         return collectMapper.selectList(wrapper);
     }
+
+    @Override
+    public boolean deleteById(Long id) {
+        Collect collect = new Collect();
+        collect.setId(id);
+        collect.setIsDelete("1");
+        collectMapper.updateById(collect);
+        return true;
+    }
 }

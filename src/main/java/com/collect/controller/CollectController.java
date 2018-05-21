@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,14 +46,22 @@ public class CollectController {
     public ResponseVo add(@RequestBody CollectDto dto){
         Collect collect = new Collect();
         BeanUtils.copyProperties(dto, collect);
-        dto.setUserId(1L);
+        collect.setUserId(1L);
+        collect.setCreateTime(new Date());
+        collect.setModifyTime(new Date());
+        collect.setIsDelete("0");
         collectService.insert(collect);
 
         return ResultBuilder.success();
     }
 
     @RequestMapping(value = "{id}",method = RequestMethod.DELETE)
-    public void delte(@PathVariable Long id){
+    public ResponseVo delte(@PathVariable Long id){
+        collectService.deleteById(id);
+        return ResultBuilder.success();
+    }
+    @RequestMapping(value = "/delete/{id}")
+    public void delete(@PathVariable Long id){
         collectService.deleteById(id);
     }
 

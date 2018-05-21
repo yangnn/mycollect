@@ -18,4 +18,5 @@ public interface CollectService extends IService<Collect> {
 
     List<Collect> getByUserId(Long userId);
 
+    boolean deleteById(Long id);
 }
